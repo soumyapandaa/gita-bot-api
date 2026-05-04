@@ -134,8 +134,7 @@ def ask_gita(request: AskRequest, api_key: str = Depends(verify_api_key)):
     start = time.time()
 
     try:
-        docs = retriever.invoke(request.question)
-        context = "\n\n".join([doc.page_content for doc in docs])
+        context = GITA_TEXT
 
         response = chain.invoke({
             "context": context,
