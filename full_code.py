@@ -5,9 +5,6 @@ from pydantic import BaseModel, Field
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, AIMessage
-from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 from dotenv import load_dotenv
 from datetime import datetime
 import time
@@ -42,12 +39,7 @@ Chapter 18 - Moksha Yoga: Abandon all duties and take refuge in him alone.
 He will liberate you from all sins.
 """
 
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=30)
-chunks = text_splitter.create_documents([GITA_TEXT])
-embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-vectorstore = FAISS.from_documents(chunks, embeddings)
-retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
-print("Knowledge base ready.\n")
+context = GITA_TEXT
 
 # --- LLM ---
 llm = ChatGroq(model="llama-3.3-70b-versatile")
