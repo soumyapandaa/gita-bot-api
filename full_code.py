@@ -81,11 +81,7 @@ app = FastAPI(
 # This tells browser which origins are allowed to call this API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",    # local frontend development
-        "http://localhost:8080",    # another common dev port
-        "https://yourdomain.com",   # your production frontend
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "DELETE"],
     allow_headers=["*"],
